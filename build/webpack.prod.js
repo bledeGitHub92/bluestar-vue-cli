@@ -69,8 +69,8 @@ module.exports = merge(base, {
         new HtmlPlugin(Object.assign({
             chunks: ['runtime', 'app'],
             filename: 'app.html',
-            template: './src/app/app.html',
-        }, getVendor(['vue', 'vendor']))), // 配置第三方依赖),
+            template: './src/app.html',
+        }, getVendor(['vue']))), // 配置第三方依赖),
         ...setReferencePlugin(), // 设置 webpack.DllReferencePlugin
         new webpack.HashedModuleIdsPlugin(),
         new webpack.DefinePlugin({

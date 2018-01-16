@@ -21,7 +21,7 @@ module.exports = merge(base, {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new HtmlPlugin({
-            template: './src/app/app.html',
+            template: './src/app.html',
             filename: 'app.html',
             chunks: ['app']
         })

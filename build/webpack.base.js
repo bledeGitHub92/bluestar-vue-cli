@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        app: './src/app/app.js'
+        app: './src/app.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),    // 输出路径，须使用绝对路径
