@@ -46,6 +46,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "supervisor -w build,devServer ./devServer/server.js",
     "mkdll": "webpack --config build/webpack.dll.js --progress --colors",
-    "build": "webpack --config build/webpack.prod.js --progress --colors"
+    "build": "webpack --config build/webpack.prod.js --progress --colors --hide-modules"
   }
 }
