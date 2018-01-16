@@ -104,7 +104,9 @@ function setReferencePlugin() {
 }
 
 function getVendor(vendors) {
-    var ret = {};
+    var ret = {
+        runtime: `/dlls/${bundleConfig.runtime.js}`
+    };
 
     vendors.forEach(name => {
         ret[name] = `/dlls/${bundleConfig[name].js}`
