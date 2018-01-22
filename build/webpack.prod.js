@@ -14,7 +14,11 @@ var extractLESS = new ExtractPlugin({ filename: 'styles/[name].app.[contenthash:
 var extractCSSofVue = new ExtractPlugin({ filename: 'styles/[name].static.[contenthash:8].css', allChunks: true });
 var extractLESSofVue = new ExtractPlugin({ filename: 'styles/[name].app.[contenthash:8].css', allChunks: true });
 
-
+Object.keys(base.entry).forEach(function (name) {
+    base.entry[name] = [
+        'babel-polyfill'
+    ].concat(base.entry[name]);
+});
 
 module.exports = merge(base, {
     // devtool: 'source-map',
