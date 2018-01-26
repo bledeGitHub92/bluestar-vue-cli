@@ -3,15 +3,15 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-const routes = [{
-    path: 'route-path', components: resolve => {
-        require.ensure([], () => void resolve(require('require-path')), 'name')
-    }
-}];
-
-const router = new VueRouter({
-    mode: 'history',
-    routes
-});
-
-export default router;
+export function createRouter() {
+    return new VueRouter({
+        mode: 'history',
+        routes: [{
+            path: '/prerender',
+            component: () => import('../components/PreRender.vue')
+        }, {
+            path: '/item',
+            component: () => import('../components/item.vue'),
+        }]
+    });
+}
