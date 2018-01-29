@@ -81,5 +81,5 @@ module.exports = function setupDevServer(app, templatePath, cb) {
         update();
     });
 
-    return readyPromise
+    return readyPromise;
 }

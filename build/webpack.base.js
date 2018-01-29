@@ -7,8 +7,6 @@ const extractLESSofVue = new ExtractPlugin({ filename: 'styles/[name].app.[conte
 
 const isProd = process.env.NODE_ENV === 'production';
 
-console.log(isProd);
-
 module.exports = {
     devtool: isProd ? false : '#cheap-module-source-map',
     output: {

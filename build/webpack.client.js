@@ -3,17 +3,12 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.js');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
-var CleanPlugin = require('clean-webpack-plugin');
 
 module.exports = merge(baseConfig, {
     entry: {
         app: './src/entry-client.js'
     },
     plugins: [
-        new CleanPlugin(['dist'], {
-            verbose: true,
-            root: path.resolve(__dirname, '../'),
-        }),
         // strip dev-only code in Vue source
         new webpack.DefinePlugin({
             'process.env': {
