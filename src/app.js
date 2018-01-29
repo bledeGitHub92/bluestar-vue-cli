@@ -8,9 +8,9 @@ export function createApp() {
 
     const router = createRouter();
     const store = createStore();
-    
+
     sync(store, router);
-    
+
     const app = new Vue({
         store,
         router,
@@ -18,5 +18,5 @@ export function createApp() {
     });
 
     return { app, router, store };
-    
+
 };
