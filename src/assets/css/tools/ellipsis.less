@@ -1,0 +1,10 @@
+/**
+ * 最多显示n行，多余了就显示省略号
+ */
+ .ellipsis(@row-num: 1) {
+	display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: @row-num;
+    -webkit-box-orient: vertical;
+}

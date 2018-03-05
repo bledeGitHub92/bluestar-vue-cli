@@ -1,4 +1,5 @@
-import { createApp } from './app'
+import '@assets/css/global.less';
+import { createApp } from './app';
 
 const { app, router, store } = createApp();
 

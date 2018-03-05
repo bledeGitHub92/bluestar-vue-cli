@@ -1,0 +1,15 @@
+.hide {
+  display: none !important;
+}
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+  height: 0;
+}
+.clearfix:before {
+  content: '';
+  display: block;
+  clear: both;
+  height: 0;
+}

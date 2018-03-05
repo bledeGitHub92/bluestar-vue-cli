@@ -4,6 +4,9 @@ import { createRouter } from './router/router';
 import { createStore } from './store/store';
 import { sync } from 'vuex-router-sync';
 
+import VueMedLinker from './assets/vue-med-linker.js';
+Vue.use(VueMedLinker);
+
 export function createApp() {
 
     const router = createRouter();
