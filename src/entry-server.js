@@ -1,13 +1,10 @@
 import { createApp } from './app'
 
 export default context => new Promise((resolve, reject) => {
-
     const { app, router, store } = createApp();
 
     router.push(context.url);
-
     router.onReady(() => {
-        
         const mathedComponents = router.getMatchedComponents();
 
         if (!mathedComponents.length) {
@@ -22,7 +19,5 @@ export default context => new Promise((resolve, reject) => {
             context.state = store.state;
             resolve(app);
         }).catch(reject);
-
     }, reject);
-
 });

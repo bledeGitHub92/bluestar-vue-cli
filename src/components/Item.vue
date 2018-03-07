@@ -5,7 +5,14 @@
 </div>
 </template>
 <script>
+import titleMixin from '../mixins/title-mixin';
+
 export default {
+  name: 'Item',
+  mixins: [titleMixin],
+  title() {
+    return 'item';
+  },
   asyncData({ store, route }) {
     // 触发 action 后，会返回 Promise
     return store.dispatch("fetchItem", route.params.id);
@@ -18,7 +25,7 @@ export default {
   },
   methods: {
     sayItem() {
-      console.log(this.item);
+      this.$medLoading.show();
     }
   }
 };

@@ -3,8 +3,8 @@ const path = require('path');
 const MFS = require('memory-fs');
 const webpack = require('webpack');
 const chokidar = require('chokidar');
-const clientConfig = require('./webpack.client');
-const serverConfig = require('./webpack.server');
+const clientConfig = require('../build/webpack.client');
+const serverConfig = require('../build/webpack.server');
 
 const readFile = (fs, file) => {
     try {

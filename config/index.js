@@ -3,11 +3,12 @@
 const path = require('path');
 
 module.exports = {
-  dev: {},
-  prod: {
-    // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'vuessr',
-    assetsPublicPath: '/public/',
+  dev: {
+    assetsPublicPath: '/',
+    port: 8888,
+  },
+  build: {
+    assetsRoot: path.join(__dirname, '../dist'),
+    assetsPublicPath: '/',
   }
 }

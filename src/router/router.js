@@ -7,11 +7,11 @@ export function createRouter() {
     return new VueRouter({
         mode: 'history',
         routes: [{
-            path: '/prerender',
-            component: () => import('../components/PreRender.vue')
+            path: '/',
+            component: () => import('../components/index.vue'),
         }, {
             path: '/item',
-            component: () => import('../components/item.vue'),
+            component: () => import('../components/item.vue')
         }]
     });
 }

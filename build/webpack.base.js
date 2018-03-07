@@ -4,15 +4,17 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const ExtractPlugin = require('extract-text-webpack-plugin');
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = !isProd;
+const config = require('../config/index');
 
 const extractCss = new ExtractPlugin({ filename: 'styles/[name].static.[contenthash:8].css', disable: isDev });
 const extractLess = new ExtractPlugin({ filename: 'styles/[name].static.[contenthash:8].css', disable: isDev });
 const extractLessOfVue = new ExtractPlugin({ filename: 'styles/[name].vue.[contenthash:8].css', disable: isDev });
+const extractCssOfVue = new ExtractPlugin({ filename: 'styles/[name].vendor.[contenthash:8].css', disable: isDev });
 
 // base.plugin
 const basePlugin = [
     extractCss, extractLess,
-    extractLessOfVue
+    extractCssOfVue, extractLessOfVue
 ];
 const prodPlugin = [
     new webpack.optimize.UglifyJsPlugin({
@@ -31,8 +33,8 @@ module.exports = {
     devtool: isProd ? false : '#cheap-module-source-map',
     output: {
         filename: '[name].[chunkhash:8].js',    // 输出文件名
-        path: path.resolve(__dirname, '../dist'),    // 输出路径，须使用绝对路径
-        publicPath: '/public/',
+        path: config.build.assetsRoot,    // 输出路径，须使用绝对路径
+        publicPath: isProd ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
         chunkFilename: 'scripts/[name].[chunkhash:8].js',
     },
     resolve: {
@@ -62,8 +64,7 @@ module.exports = {
                 use: [cssLoader, 'postcss-loader', 'less-loader'],
                 fallback: 'vue-style-loader'
             })
-        },
-        {
+        }, {
             test: /\.vue$/,
             include: path.resolve(__dirname, '../src'),
             loader: 'vue-loader',
@@ -71,6 +72,10 @@ module.exports = {
                 loaders: {
                     less: extractLessOfVue.extract({
                         use: [cssLoader, 'postcss-loader', 'less-loader'],
+                        fallback: 'vue-style-loader'
+                    }),
+                    css: extractCssOfVue.extract({
+                        use: [cssLoader],
                         fallback: 'vue-style-loader'
                     })
                 }
