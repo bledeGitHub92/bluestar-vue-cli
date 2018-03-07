@@ -99,7 +99,7 @@ function render(req, res) {
     };
 
     const context = {
-        title: 'Vue HN 2.0', // default title
+        title: 'Vue HN2.0', // default title
         url: req.url
     };
     renderer.renderToString(context, (err, html) => {
@@ -114,6 +114,7 @@ function render(req, res) {
 }
 
 app.get('*', isProd ? render : (req, res) => {
+    console.log(req.url);
     readyPromise.then(() => render(req, res));
 });
 

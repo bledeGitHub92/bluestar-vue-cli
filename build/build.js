@@ -1,3 +1,4 @@
+const ora = require('ora');
 const rm = require('rimraf');
 const path = require('path');
 const chalk = require('chalk');
@@ -5,12 +6,17 @@ const webpack = require('webpack');
 const config = require('../config/index');
 const clientConfig = require('./webpack.client');
 const serverConfig = require('./webpack.server');
+const copyTemplate = require('./copy-template');
 
-rm(path.join(config.build.assetsRoot), err => {
+const spinner = ora('building for production...');
+spinner.start();
+
+rm(config.build.assetsRoot, err => {
   if (err) throw err;
 
-  Promise.all(build(clientConfig), build(serverConfig))
-    .then((stats) => {
+  Promise.all([build(clientConfig), build(serverConfig)])
+    .then(stats => {
+      spinner.stop();
       stats.forEach(stat => {
         process.stdout.write(stat.toString({
           colors: true,
@@ -24,17 +30,18 @@ rm(path.join(config.build.assetsRoot), err => {
           console.log(chalk.red('  Build failed with errors.\n'))
           process.exit(1)
         }
+      });
 
-        console.log(chalk.cyan('  Build complete.\n'))
-        console.log(chalk.yellow(
-          '  Tip: built files are meant to be served over an HTTP server.\n' +
-          '  Opening index.html over file:// won\'t work.\n'
-        ));
-      })
-    }).catch(reason => {
-      throw reason;
+      copyTemplate();
+
+      console.log(chalk.cyan('  Build complete.\n'))
+      console.log(chalk.yellow(
+        '  Tip: built files are meant to be served over an HTTP server.\n' +
+        '  Opening index.html over file:// won\'t work.\n'
+      ));
+    }).catch(err => {
+      throw err;
     });
-
 });
 
 function build(config) {
