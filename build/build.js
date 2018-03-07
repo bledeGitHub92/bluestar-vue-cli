@@ -11,7 +11,15 @@ const copyTemplate = require('./copy-template');
 const spinner = ora('building for production...');
 spinner.start();
 
-rm(config.build.assetsRoot, err => {
+if (typeof config.build.assetsSubDir !== 'string' || config.build.assetsSubDir === '') {
+  console.log('');
+  console.log('');
+  console.log(chalk.red('  file: app_root/config/index.js -> config.build.assetsSubDir can not be empty.  '))
+  console.log('');
+  process.exit(1);
+}
+
+rm(path.join(config.build.assetsRoot, config.build.assetsSubDir), err => {
   if (err) throw err;
 
   Promise.all([build(clientConfig), build(serverConfig)])

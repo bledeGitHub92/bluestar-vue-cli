@@ -26,6 +26,8 @@ const devPlugin = [
     // new FriendlyErrorsPlugin()
 ];
 
+console.log(path.join(config.build.assetsRoot, config.build.assetsSubDir));
+
 // 是否压缩 css
 const cssLoader = setMinimize('css-loader');
 
@@ -33,7 +35,7 @@ module.exports = {
     devtool: isProd ? false : '#cheap-module-source-map',
     output: {
         filename: '[name].[chunkhash:8].js',    // 输出文件名
-        path: config.build.assetsRoot,    // 输出路径，须使用绝对路径
+        path: path.join(config.build.assetsRoot, config.build.assetsSubDir),    // 输出路径，须使用绝对路径
         publicPath: isProd ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
         chunkFilename: 'scripts/[name].[chunkhash:8].js',
     },

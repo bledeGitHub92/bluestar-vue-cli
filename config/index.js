@@ -8,7 +8,8 @@ module.exports = {
     port: 8888,
   },
   build: {
-    assetsRoot: path.join(__dirname, '../dist'),
+    assetsRoot: path.join(__dirname, '../dist'),  // 绝对路径
+    assetsSubDir: 'vuessr',  // 相对路径
     assetsPublicPath: '/',
   }
 }
